@@ -1,1 +1,2 @@
-# 3D linear wave resistance
+# 3D wave resistance BEM code with linearized free surface condition. 
+
