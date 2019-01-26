@@ -24,7 +24,7 @@ Features
 --------
 
 - Linearize free surface boundary condition
-- Fortran 90 implemenation
+- Fortran 90 implementation
 
 
 Build
@@ -50,4 +50,4 @@ $  ./p3 fifi.dat test1.out .2 1
 Results
 ------------
 - Hydrodynamic results are viewable in .vtp files
-- VTK paraview is the recommended viewing engine.
+- VTK Paraview is the recommended viewing engine.
