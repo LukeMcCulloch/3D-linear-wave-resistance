@@ -1,4 +1,4 @@
-.. Linearized Free 3D Surface Wave Potentface Wave Resistance Code documentation master file, created by
+.. Linearized Free 3D Surface Wave Resistance Code documentation master file, created by
    sphinx-quickstart on Sat Jan 26 16:27:14 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -23,7 +23,7 @@ Indices and tables
 Features
 --------
 
-- Linearize free surface boundary condition
+- Linearized free surface boundary condition
 - Fortran 90 implementation
 
 
@@ -31,12 +31,15 @@ Build
 ------------
 
 Build the executable:
+- make file set up to use gfortran
+- might work with g95, not tested.
 cd into the main directory for this project and run:
 $    make
 
 
 Run
 ------------
+
 Run the included wigley hull example with
 
 $  ./p3 fifi.dat test1.out .2 1
@@ -51,3 +54,7 @@ Results
 ------------
 - Hydrodynamic results are viewable in .vtp files
 - VTK Paraview is the recommended viewing engine.
+
+Notes
+------------
+- This version tested on OSX only
