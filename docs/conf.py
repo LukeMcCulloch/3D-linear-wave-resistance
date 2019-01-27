@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u'Linearized Free 3D Surface Wave Potentface Wave Resistance Code'
+project = u'Linearized Free Surface 3D Wave Resistance Code'
 copyright = u'2019, Luke McCulloch'
 author = u'Luke McCulloch'
 
@@ -132,7 +132,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'LinearizedFree3DSurfaceWavePotentfaceWaveResistanceCode.tex', u'Linearized Free 3D Surface Wave Potentface Wave Resistance Code Documentation',
+    (master_doc, 'LinearizedFree3DSurfaceWavePotentfaceWaveResistanceCode.tex', u'Linearized Free Surface 3D Wave Resistance Code Documentation',
      u'Luke McCulloch', 'manual'),
 ]
 
@@ -142,7 +142,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'linearizedfree3dsurfacewavepotentfacewaveresistancecode', u'Linearized Free 3D Surface Wave Potentface Wave Resistance Code Documentation',
+    (master_doc, 'linearizedfree3dsurfacewavepotentfacewaveresistancecode', u'Linearized Free Surface 3D Wave Resistance Code Documentation',
      [author], 1)
 ]
 
@@ -153,7 +153,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'LinearizedFree3DSurfaceWavePotentfaceWaveResistanceCode', u'Linearized Free 3D Surface Wave Potentface Wave Resistance Code Documentation',
+    (master_doc, 'LinearizedFree3DSurfaceWavePotentfaceWaveResistanceCode', u'Linearized Free Surface 3D Wave Resistance Code Documentation',
      author, 'LinearizedFree3DSurfaceWavePotentfaceWaveResistanceCode', 'One line description of project.',
      'Miscellaneous'),
 ]
