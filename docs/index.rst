@@ -45,13 +45,12 @@ Run
 
 Run the included wigley hull example with
 
-$  ./p3 fifi.dat test1.out .2 1
+$  ./flowsolve fifi.dat test1.out .2 
 
-- ./p3 runs the executable
+- ./flowsolve runs the executable
 - fifi.dat selects the included panel input file of the wigely hull
 - test1.out sets an output file
 - .2 sets the Froude number to 0.2
--  1 selects the SimQuit matrix inversion routine
 
 Results
 ------------
