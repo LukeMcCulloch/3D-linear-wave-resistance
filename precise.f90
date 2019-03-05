@@ -1,16 +1,14 @@
 MODULE precise
 !
-! Last update: 14.07.1999 by Lothar Birk
-!
 ! Module to handle the question of precision gracefully.
-! Put the following lines in your code.
+! usage:
 !    use precise, only : defaultp
 !    integer, parameter, private :: WP=defaultp
 ! You have to omit the private keyword outside of modules
 !    use precise, only : defaultp
 !    integer, parameter :: WP=defaultp
 !
-! Now you can declare al real variables as
+! Now declare all real variables as
 !    real(wp) :: ....
 ! If you intend to change from single to double precision just
 ! change the last integer statement below from

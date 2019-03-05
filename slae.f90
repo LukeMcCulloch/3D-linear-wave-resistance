@@ -1,7 +1,6 @@
 MODULE SLAE
 !
 ! Module for the solution of systems of linear equations.
-! Last update: 09.01.2001 by Lothar Birk
 !  
   USE precise, ONLY: DEFAULTP
   IMPLICIT NONE
@@ -149,8 +148,6 @@ CONTAINS
 
   SUBROUTINE GSIT(A,B,EPS,OMEGA,MAXIT,X,ERROR)
 !
-! Last update: 14.07.1999 by Lothar Birk
-!
 ! Gauss-Seidel over-relaxation algorithm for the iterative solution of
 ! systems of linear equations:
 !                        A*X = B
@@ -226,7 +223,7 @@ CONTAINS
 
 
    SUBROUTINE SIMQIT(A,R,N,NMAX,SING,AV,DX,X,iter)
-! from Soeding/Bertram
+! 
 ! Iterative solution of a non-singular, REAL linear system of equations
 ! A X = R, WHERE A, X and R are (n by n), (n by 1) and (n by 1) matrices,
 ! respectively. (n by c) means: n rows, c columns.

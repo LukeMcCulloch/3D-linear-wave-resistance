@@ -1,8 +1,9 @@
 !!
-!! Simple program to read fifi and return the array to hw1
+!! read fifi.dat or other panel geometry file 
+!! and return the array data
 !!
 !!
-MODULE io    ! Every Fortran program starts with a program statement
+MODULE io
 
 
 
@@ -20,8 +21,8 @@ CONTAINS
                          npanels, nfspanels, npoints, &
                          panels, points,i,j,deltax )
 
-!     INTEGER :: narg      ! Integer variables
-     INTEGER :: i, j, n
+
+     INTEGER :: i, j
      INTEGER :: npoints, npanels, nfspanels
 
      INTEGER, ALLOCATABLE, DIMENSION(:,:) :: panels
@@ -30,7 +31,6 @@ CONTAINS
      CHARACTER(len=*) :: outputfile  ! file name
      CHARACTER(len=*) :: title
 
-     LOGICAL :: flexists  ! a logical variable. I .true. or .false.
 
      REAL(WP), ALLOCATABLE, DIMENSION(:,:) :: points
      real(wp) :: deltax
@@ -51,11 +51,11 @@ CONTAINS
      close(10)
      ! Finished Reading the data-------------------------------------
   
-     ! Write the fifi data (just because I want to)------------------
+     ! Write the panel data (for checking purposes)------------------
      OPEN(20,file=outputfile)
-     Write(20,*) ' Luke McCulloch, NAME 6160 Project, Outputfile '
+     Write(20,*) ' potential flow panel code, Outputfile '
      write(20,*)
-     write(20,*) '(1.) Read the fifi data file and copy to "out.dat" '
+     write(20,*) '(1.) Read the geometry file and copy to "out.dat" '
      write(20,*) ' using the subroutine "input" via module "io"'
      write(20,*) '---------------------------------------------------------'
      write(20,*) title
@@ -67,10 +67,7 @@ CONTAINS
 
      close(20)
   
-     write(*,*)  ! Blank space
-     !  IF (ALLOCATED(points)) DEALLOCATE(points)
-     !  IF (ALLOCATED(panels)) DEALLOCATE(panels)
-     !  IF (ALLOCATED(panels)) DEALLOCATE(op)
+     write(*,*)  
 
   END SUBROUTINE input
 !! End of Subroutine to read the data ----------------------------------
@@ -91,9 +88,8 @@ CONTAINS
 
      Open(20,file= outputfile, Access= 'append', status='old')
      write(20,*)
-     Write(20,*) ' Results From the Wigley Hull Linear Free Surface Panel Code '
+     Write(20,*) ' Results From the panel-hull Linear Free Surface Panel Code '
      write(20,*) '---------------------------------------------------------------'
-     write(20,*) ' (2.) Output data using the subroutine "output" in module "io" '
      write(20,*)
      write(20,*) 'source sink summation over all panels'
      write(20,'(3D16.8)') sourcesink
@@ -101,7 +97,7 @@ CONTAINS
      write(20,*) 'Wave Resistance'
      write(20,'(3D16.8)') cw
      write(20,*)
-     write(20,*) 'iter count from simquit'
+     write(20,*) 'iteration count from the solver'
      write(20,'(I4)') iter
      write(20,*)
      write(20,*)
