@@ -31,9 +31,12 @@ Build
 ------------
 
 Build the executable:
+
 - make file set up to use gfortran
-- might work with g95, not tested.
-cd into the main directory for this project and run:
+- assumes you have make tools.
+- might work with g95 but not tested
+- cd into the main directory for this project and run:
+
 $    make
 
 
@@ -57,4 +60,8 @@ Results
 
 Notes
 ------------
-- This version tested on OSX only
+
+This version tested on:
+
+- OSX
+- Linux
