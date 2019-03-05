@@ -10,14 +10,14 @@
 SOURCES = precise.f90 \
 	io.f90 \
 	vtkxmlmod.f90 \
-	fifthpanel.f90 \
-	fourthconst.f90 \
-	A.f90 \
+	panelgeometry.f90 \
+	constants.f90 \
+	influence.f90 \
 	slae.f90 \
-	p3.f90
+	flowsolve.f90
 
 ## Define name of main program
-PROGRAM = p3
+PROGRAM = flowsolve
 
 # Compiler
 FF = gfortran
