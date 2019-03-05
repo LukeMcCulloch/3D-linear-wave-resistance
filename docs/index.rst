@@ -33,9 +33,11 @@ Build
 Build the executable:
 
 - make file set up to use gfortran
+- assumes you have make tools.
 - might work with g95 but not tested
 - cd into the main directory for this project and run:
-- $    make
+
+$    make
 
 
 Run
