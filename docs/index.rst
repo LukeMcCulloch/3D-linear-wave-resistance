@@ -60,4 +60,8 @@ Results
 
 Notes
 ------------
-- This version tested on OSX only
+
+This version tested on:
+
+- OSX
+- Linux
