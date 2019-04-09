@@ -116,8 +116,7 @@ PROGRAM flowsolver
   WRITE(6,'(A)') ' -------------------------------------------------------------------- '
   WRITE(6,'(A)') ' -------------------------------------------------------------------- '
   WRITE(6,'(A)') " "
-  WRITE(6,'(A)') ' Hi Ivan, Roman, and the Microsoft Quantum Team,'
-  WRITE(6,'(A)') '    Welcome to my flow solver sample code. '
+  WRITE(6,'(A)') ' Hi, and welcome to my flow solver sample code! '
   WRITE(6,'(A)') " In general this code computes Laplace's equation "
   WRITE(6,'(A)') ' using a BEM method, Rankine Green functions, and linear superposition '
   WRITE(6,'(A)') ' for simple potential flow about an arbitrary ship hull shape '
