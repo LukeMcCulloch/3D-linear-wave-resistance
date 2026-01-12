@@ -4,7 +4,7 @@
 
 
 
-## tangential velocity 2##
+## tangential velocity 2
 ![](docs/vt2.png)
 
 Here is a windows 11 workflow:
