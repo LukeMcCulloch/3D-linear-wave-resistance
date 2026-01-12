@@ -11,4 +11,6 @@ Here is a windows 11 workflow:
 
 mingw32-make
 
-./flowsolve.exe fifi.dat
+./flowsolve.exe fifi.dat outputFileName Fr
+
+where outputFileName a handle that will be used in generating various output files and Fr is the Froude number for the linear steady state wave drag prediciton.
