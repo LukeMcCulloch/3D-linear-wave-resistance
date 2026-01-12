@@ -30,14 +30,14 @@ PROGRAM flowsolver
   INTEGER :: npoints, npanels, nfspanels
   INTEGER :: iounit
 
-  CHARACTER(len=24) :: inputfile   ! file name can be max. 24 char. long
-  CHARACTER(len=24) :: outputfile  ! file name can be max. 24 char. long
+  CHARACTER(len=128) :: inputfile   ! file name can be max. 24 char. long
+  CHARACTER(len=128) :: outputfile  ! file name can be max. 24 char. long
   CHARACTER(len=24) :: str_Fr      ! Froude number
 
   !! output vtk file names:
-  CHARACTER(len=24) :: datafile1
-  CHARACTER(len=24) :: datafile2
-  CHARACTER(len=24) :: datafile3
+  CHARACTER(len=128) :: datafile1
+  CHARACTER(len=128) :: datafile2
+  CHARACTER(len=128) :: datafile3
 
   !! title 
   CHARACTER(len=30) :: title
@@ -138,7 +138,7 @@ PROGRAM flowsolver
   ! for the common extension iargc()
   ! narg = iargc()
   narg = command_argument_count()
-  WRITE(6, FMT='(AI3A)') ' we have ', narg, ' command line arguments '
+  WRITE(6, FMT='(A,I3,A)') ' we have ', narg, ' command line arguments '
   
   ! Now read the name of the input file and output file from the command line
 
@@ -163,8 +163,8 @@ PROGRAM flowsolver
 
   IF (flexists) THEN
   
-     WRITE(6,'(AA)') ' input file,  ', inputfile
-     WRITE(6,'(AA)') 'output file, ', outputfile
+     WRITE(6,'(A,A)') ' input file,  ', inputfile
+     WRITE(6,'(A,A)') 'output file, ', outputfile
 
 
   

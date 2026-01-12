@@ -40,7 +40,7 @@ CONTAINS
      OPEN(10,file=inputfile) ! open the file
      
      ! Read the data-------------------------------------------------
-     read(10,'(AAAAA)') title
+     read(10,'(A)') title
      read(10,*) i,j
      read(10,*) npanels, nfspanels, npoints
      read(10,*) deltax
@@ -59,8 +59,8 @@ CONTAINS
      write(20,*) ' using the subroutine "input" via module "io"'
      write(20,*) '---------------------------------------------------------'
      write(20,*) title
-     WRITE(20, FMT='(AI3A)') ' we have ', npanels+nfspanels, ' panels '
-     WRITE(20, FMT='(AI3A)') ' we have ', npoints, ' points '
+     WRITE(20, FMT='(A,I3,A)') ' we have ', npanels+nfspanels, ' panels '
+     WRITE(20, FMT='(A,I3,A)') ' we have ', npoints, ' points '
      write(20,'(4I4)') panels
      write(20,'(3D16.8)') points  ! Use Implicit do loop array formating
      write(20,*) '--------------------------------------------------------'
