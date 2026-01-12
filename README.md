@@ -3,6 +3,10 @@
 [Here is the documentation](https://3d-linear-wave-resistance.readthedocs.io/en/latest/)
 
 
+
+## tangential velocity 2##
+![](docs/vt2.png)
+
 Here is a windows 11 workflow:
 
 mingw32-make
