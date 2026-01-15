@@ -1,0 +1,279 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{nicefrac}
+
+\newcommand{\vtr}[1]{\underline{#1}}
+
+\newcommand{\mat}[1]{\underline{\underline{#1}}}
+
+\newcommand{\residual}{\vtr{R}\left(\vtr{s}\right)}
+
+\newcommand{\deltaDefinition}{\left( \vtr{s}^{n+1} - \vtr{s}^{n} \right) }
+
+\newcommand{\derivativeTotal}[2]{\frac{d {#1}}{d {#2}} }
+\newcommand{\derivative}[2]{\frac{\partial {#1}}{\partial {#2}} }
+
+\newcommand{\derivativeSecond}[2]{\frac{\partial^2 {#1}}{\partial {#2}^2} }
+
+\newcommand{\derivativeNice}[2]{\nicefrac{\partial {#1}}{\partial {#2}} }
+
+
+\newcommand{\kmu}{\frac{\kappa}{\mu}}
+
+
+%%% boldface letters for intervals
+%\def\bfm#1{\protect{\makebox{\boldmath $#1$}}}
+%\def\bfm#1{\protect{\makebox{\boldmath $#1$}}}
+%\def\bfm#1{\protect{\makebox{\boldmath{#1}}}} %does not bold
+%\def\bfm[1]{\protect{\makebox{\mathbf{#1}}}} %does not work
+%\def\bfm#1{{\makebox{\boldmath{#1}}}}
+%\def\bfm#1{\protect{\makebox{\boldmath $#1$}}}
+%%
+\newcommand{\mathBoldUp}[1]{\textup{\textbf{#1}}} %works
+\newcommand{\bfm}[1]{\mathBoldUp{#1}} %works with \mathBoldUp
+\def\a {\bfm{a}}
+\def\b {\bfm{b}}
+\def\c {\bfm{c}}
+\def\d {\bfm{d}}
+\def\e {\bfm{e}}
+\def\f {\bfm{f}}
+\def\g {\bfm{g}}
+\def\h {\bfm{h}}
+\def\ii {\bfm{i}}       % \i is already 'i without dot'
+\def\j {\bfm{j}}
+\def\k {\bfm{k}}
+\def\l {\bfm{l}}
+\def\m {\bfm{m}}
+\def\n {\bfm{n}}
+\def\o {\bfm{o}}
+\def\p {\bfm{p}}
+\def\q {\bfm{q}}
+\def\r {\bfm{r}}
+\def\s {\bfm{s}}
+\def\t {\bfm{t}}
+\def\u {\bfm{u}}
+\def\vv {\bfm{v}}       % \v is already 'check' 
+\def\w {\bfm{w}}
+\def\x {\bfm{x}}
+\def\y {\bfm{y}}
+\def\z {\bfm{z}}
+\def\A {\bfm{A}}
+\def\B {\bfm{B}}
+\def\C {\bfm{C}}
+\def\DD{\bfm{D}}        % \D is already \displaystyle
+\def\E {\bfm{E}}
+\def\F {\bfm{F}}
+\def\G {\bfm{G}}
+\def\H {\bfm{H}}
+\def\I {\bfm{I}}
+\def\J {\bfm{J}}
+\def\K {\bfm{K}}
+\def\L {\bfm{L}}
+\def\M {\bfm{M}}
+\def\N {\bfm{N}}
+\def\O {\bfm{O}}
+\def\P {\bfm{P}}
+\def\Q {\bfm{Q}}
+\def\R {\bfm{R}}
+\def\S {\bfm{S}}
+\def\T {\bfm{T}}
+\def\U {\bfm{U}}
+\def\V {\bfm{V}}
+\def\W {\bfm{W}}
+\def\X {\bfm{X}}
+\def\Y {\bfm{Y}}
+\def\Z {\bfm{Z}}
+
+
+\newcommand{\fint}{\f_{internal}}
+\newcommand{\fext}{\f_{external}}
+\newcommand{\grad}{\nabla}
+
+\newcommand{\of}[1]{\left({#1}\right)}
+
+%\newcommand{\b}[1]{\boldsymbol{#1}}
+
+
+%\newcommand{\lmult}{\lambda}
+\newcommand{\lmult}{\beta}
+
+\newcommand{\adjoint}{\lambda}
+
+\usepackage{optidef}
+
+%opening
+\title{3D linear free surface Hess and Smith Panel Code }
+\author{Luke McCulloch}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\section{}
+
+\section{What the Fortran code assembles (operator form)}
+
+The main program assembles and solves a dense linear system for the unknown
+source strengths \(\sigma\) defined on the union of the hull panels and the
+(first-order) free-surface panels.  Let
+\[
+N \;=\; N_b + N_f,
+\]
+where \(N_b=\texttt{npanels}\) is the number of hull (body) panels and
+\(N_f=\texttt{nfspanels}\) is the number of free-surface panels.  The solver
+forms
+\[
+A\,\sigma \;=\; b,
+\]
+where \(\sigma\in\mathbb{R}^{N}\) is the vector of source strengths and
+\(A\in\mathbb{R}^{N\times N}\) is the influence matrix assembled from panel
+induced velocities and second derivatives.
+
+\subsection{Body rows (no-penetration boundary condition)}
+For a body (hull) collocation point \(p_i\) (typically the \(i\)-th hull panel
+center) with outward unit normal \(n_i\), the enforced boundary condition is the
+standard no-penetration condition:
+\[
+n_i \cdot \left(\sum_{j=1}^{N} \sigma_j \,\nabla \phi_j(p_i)\right)
+\;=\;
+n_i \cdot V_\infty,
+\qquad i=1,\dots,N_b,
+\]
+where \(\nabla \phi_j(p_i)\) is the velocity induced at \(p_i\) by a unit source
+on panel \(j\).  In the Fortran code, \(\nabla\phi_j(p_i)\) is exactly what
+\texttt{hsinfluence(...)} returns (a 3D velocity / gradient vector), including
+the half-ship symmetry contributions described below.
+
+\paragraph{Diagonal (self-influence) term.}
+When \(i=j\) for the body-body block, the code uses the known limiting value for
+the constant-strength source panel on itself:
+\[
+\nabla\phi \cdot n \;\to\; -\frac{1}{2},
+\]
+implemented as
+\[
+\texttt{vel(:,Row,Col)} \;=\; -0.5\, n_i.
+\]
+Then the matrix entry is formed as
+\[
+A_{ij} \;=\; n_i \cdot \nabla\phi_j(p_i).
+\]
+
+\subsection{Free-surface rows (linearized steady free-surface condition)}
+For a free-surface collocation point \(p_i\) (associated to free-surface panel
+\(i\)), the code enforces a steady linearized free-surface boundary condition of
+the form
+\[
+U^2\,\phi_{xx} \;+\; g\,\phi_{z} \;=\; 0
+\qquad \text{evaluated at } z=0,
+\]
+where \(U = V_\infty\cdot \hat{\mathbf{x}}\) is the forward speed and \(g\) is
+gravity.  In the assembled operator, this becomes (row-wise)
+\[
+A_{ij}
+\;=\;
+U^2\,\frac{\partial^2 \phi_j}{\partial x^2}(p_i)
+\;+\;
+g\,\frac{\partial \phi_j}{\partial z}(p_i),
+\qquad i=N_b+1,\dots,N.
+\]
+In the Fortran code:
+\begin{itemize}
+	\item \texttt{vel(3,Row,Col)} is used as \(\phi_z(p_i)\),
+	\item \texttt{hessglobal(1,1,Row,Col)} is used as \(\phi_{xx}(p_i)\),
+\end{itemize}
+and the entry is formed as
+\[
+\texttt{am(Row,Col)} = (U^2)\,\texttt{hessglobal(1,1,Row,Col)} + g\,\texttt{vel(3,Row,Col)}.
+\]
+(Here \(\texttt{vinf(1)} = U\).)
+
+\subsection{Half-ship symmetry via ZX-plane mirror}
+The code enforces symmetry about the longitudinal vertical centerplane (the
+ZX-plane) by adding a mirrored contribution rather than explicitly mirroring
+panels.
+
+\paragraph{Mirror point.}
+Given a field point \(p=(x,y,z)\), the mirrored point is
+\[
+p' \;=\; (x,-y,z).
+\]
+
+\paragraph{Velocity parity.}
+Under the centerplane reflection, the induced velocity components obey:
+\[
+v_x \text{ is even in } y,\qquad
+v_y \text{ is odd in } y,\qquad
+v_z \text{ is even in } y.
+\]
+Accordingly, if \(v=\nabla\phi_j(p)\) and \(v'=\nabla\phi_j(p')\), the code forms
+the half-ship (symmetric) velocity as
+\[
+\tilde v \;=\; \begin{bmatrix}
+	v_x + v'_x\\[4pt]
+	v_y - v'_y\\[4pt]
+	v_z + v'_z
+\end{bmatrix},
+\]
+implemented by:
+\[
+\texttt{vel\_x += vp\_x,\quad vel\_y -= vp\_y,\quad vel\_z += vp\_z.}
+\]
+
+\paragraph{Hessian parity (for \(\phi_{xx}\)).}
+For the free-surface condition, only \(\phi_{xx}\) is required.  Since
+\(\phi_{xx}\) is even in \(y\), the code adds only the \((1,1)\) component from
+the mirrored evaluation:
+\[
+\phi_{xx}(p) \;\leftarrow\; \phi_{xx}(p) + \phi_{xx}(p').
+\]
+In code this appears as:
+\[
+\texttt{hessglobal(1,1,Row,Col) += hp(1,1).}
+\]
+
+\subsection{Two practical gotchas to reproduce in Python}
+
+\paragraph{Free-surface collocation point staggering.}
+For free-surface rows, the code modifies the field point before evaluation:
+\[
+x \leftarrow x + \Delta x,\qquad z \leftarrow 0,
+\]
+implemented as:
+\[
+\texttt{fieldpoint(1)=fieldpoint(1)+deltax,\quad fieldpoint(3)=0.}
+\]
+Thus the free-surface collocation points are \emph{not} exactly the free-surface
+panel centers: they are staggered in \(x\) by \(\Delta x=\texttt{deltax}\) and
+projected to the plane \(z=0\).  This detail should be replicated exactly in any
+Python reimplementation.
+
+\paragraph{Extra \(\,+2\) padding on \texttt{am}.}
+The matrix \texttt{am} is allocated as
+\[
+\texttt{ALLOCATE(am(N+2,N+2))},
+\]
+and then passed into \texttt{SIMQIT} as:
+\[
+\texttt{call SIMQIT(TRANSPOSE(am), b, N, nmax, ...)}.
+\]
+The extra \(+2\) rows/columns appear to be a workspace requirement of
+\texttt{SIMQIT} rather than physical unknowns.  In Python, one would typically
+build and solve the physical system with
+\[
+A \in \mathbb{R}^{N\times N},\qquad N=N_b+N_f,
+\]
+without the additional padding.
+
+\end{document}
